@@ -51,11 +51,20 @@ const fooddisplay = (displayFood) => {
     disdiv.innerHTML = ``;
     for (const food of displayFood) {
         const div = document.createElement('div');
-        div.classList.add('col-md-2', 'detailsstyle');
+        div.classList.add('col-md-2', 'detailsstyle', 'mx-auto');
         div.innerHTML = `
-            <span>Id ${food.idMeal}</span>
-            <h3>${food.strMeal}</h3>
-            <img src="${food.strMealThumb}">
+
+        <div class="card text-center">
+        <div class="card-header">
+        ${food.idMeal}
+        </div>
+        <div class="card-body">
+        <img src="${food.strMealThumb}" class="card-img-top" alt="...">
+            <h5 class="card-title">${food.strMeal}</h5>
+        </div>
+     
+        </div>
+           
         `;
         disdiv.appendChild(div);
     }
@@ -64,4 +73,4 @@ const fooddisplay = (displayFood) => {
     // console.log(displayFood.strMeal);
 }
 
-loadFood('');
+loadFood('a');
