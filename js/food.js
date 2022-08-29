@@ -15,7 +15,7 @@ const getFood = (Items) => {
         const fodDiv = document.createElement('div');
         fodDiv.classList.add('col-sm-4', 'style');
         fodDiv.innerHTML = `
-        <div class="card">
+        <div class="card" onclick="getfooddetails(${item.idMeal})">
         <img src="${item.strMealThumb}" class="card-img-top" alt="...">
         <div class="card-body">
         <span>OrderID ${item.idMeal}</span>
@@ -27,7 +27,7 @@ const getFood = (Items) => {
         `;
         Maindiv.appendChild(fodDiv);
         // }
-        console.log(item)
+        //  console.log(item)
     });
 }
 
@@ -37,3 +37,31 @@ const searchfood = () => {
     loadFood(getresult);
     //console.log(getresult);
 }
+
+
+const getfooddetails = details => {
+    const url = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${details}`;
+    //console.log(url);
+    fetch(url)
+        .then(res => res.json())
+        .then(data => fooddisplay(data.meals));
+}
+const fooddisplay = (displayFood) => {
+    const disdiv = document.getElementById('displayfood');
+    disdiv.innerHTML = ``;
+    for (const food of displayFood) {
+        const div = document.createElement('div');
+        div.classList.add('col-md-2', 'detailsstyle');
+        div.innerHTML = `
+            <span>Id ${food.idMeal}</span>
+            <h3>${food.strMeal}</h3>
+            <img src="${food.strMealThumb}">
+        `;
+        disdiv.appendChild(div);
+    }
+
+
+    // console.log(displayFood.strMeal);
+}
+
+loadFood('');
